@@ -1,10 +1,9 @@
 #include <iostream>
 #include <utility>
-#include <ctime>
 #include <iomanip>
 #include <sys/stat.h>
 #include <nlohmann/json.hpp>
-#include <cstdlib>
+#include <gmd5hash.h>
 
 
 using namespace std;
@@ -73,6 +72,9 @@ namespace deployer {
 
 
 int main(int argc, char** argv, char **envp) {
+
+    auto hash = GMD5HASH::HashFile(argv[0]);
+    cout << "Hash of this program " << hash << endl;
     cout << "==============================" << endl;
     auto env = deployer::Environ(envp);
     auto deploydate = deployer::DateTimeString();
